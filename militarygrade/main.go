@@ -13,6 +13,8 @@ import (
 	"time"
 )
 
+const rawFlag = "ractf{int3rEst1ng_M4sk_paTt3rn}"
+
 var flag string
 var flagmu sync.Mutex
 
@@ -55,7 +57,7 @@ func changer() {
 		}
 
 		flagmu.Lock()
-		flag = encrypt("ractf{int3rEst1ng_M4sk_paTt3rn}", key, iv, aes.BlockSize)
+		flag = encrypt(rawFlag, key, iv, aes.BlockSize)
 		flagmu.Unlock()
 	}
 }
