@@ -2,8 +2,9 @@ FROM alpine AS builder
 
 RUN mkdir -p /opt
 RUN apk add --update git alpine-sdk ncurses-dev bash linux-headers
-ADD toybox /opt/toybox
+RUN git clone https://github.com/landley/toybox.git /opt/toybox
 WORKDIR /opt/toybox
+ADD .config .
 RUN make CFLAGS=-static
 
 WORKDIR /opt
@@ -12,6 +13,13 @@ WORKDIR /opt/dropbear
 RUN ./configure --disable-zlib --disable-syslog --enable-static --disable-wtmp --disable-lastlog
 ADD localoptions.h .
 RUN make PROGRAMS="dropbear"
+
+RUN mkdir -p /opt/chall
+WORKDIR /opt/chall
+ADD main.c .
+ADD aes.c .
+ADD aes.h .
+RUN gcc -Os -static aes.c main.c -o program
 
 RUN mkdir -p /opt/newfs/opt/ /opt/newfs/etc/
 RUN cp /opt/toybox/toybox /opt/newfs/opt/toybox
@@ -30,15 +38,15 @@ RUN for cmd in $(opt/toybox --long); do \
         ln -s /opt/toybox $cmd; \
     done
 
-ADD reee.sh /opt/newfs/opt/reee.sh
-RUN chmod +x /opt/newfs/opt/reee.sh
-WORKDIR /opt/newfs/bin
-RUN for cmd in 'ls' 'cat' 'tail' 'head' 'dir' 'less' 'more' 'vi' 'vim' 'grep'; do \
-        ln -s /opt/reee.sh $cmd; \
-    done
+RUN cp /opt/chall/program /opt/newfs/home/ractf/program
 ADD flag.txt /opt/newfs/home/ractf/flag.txt
+RUN head -c 16 /dev/random > /opt/newfs/home/ractf/keyfile
 RUN chown -R ractf:ractf /opt/newfs/home/ractf/
 RUN chmod -R +x /opt/newfs/home/ractf/
+
+RUN chown root:root /opt/newfs/home/ractf/flag.txt /opt/newfs/home/ractf/program /opt/newfs/home/ractf/keyfile
+RUN chmod 700 /opt/newfs/home/ractf/flag.txt /opt/newfs/home/ractf/keyfile /opt/newfs/etc/shadow
+RUN chmod u+s /opt/newfs/home/ractf/program
 # Throw away this builder container now
 
 FROM scratch
