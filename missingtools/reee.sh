@@ -1,0 +1,1 @@
+echo "This command has been disabled by your administrator."
