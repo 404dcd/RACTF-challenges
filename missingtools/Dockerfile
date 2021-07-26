@@ -13,9 +13,15 @@ RUN ./configure --disable-zlib --disable-syslog --enable-static --disable-wtmp -
 ADD localoptions.h .
 RUN make PROGRAMS="dropbear"
 
+WORKDIR /opt
+ADD disabled.c /opt/disabled.c
+RUN gcc -Os -static disabled.c -o disabled
+
 RUN mkdir -p /opt/newfs/opt/ /opt/newfs/etc/
 RUN cp /opt/toybox/toybox /opt/newfs/opt/toybox
 RUN cp /opt/dropbear/dropbear /opt/newfs/opt/dropbear
+RUN cp /opt/disabled /opt/newfs/opt/disabled
+
 RUN adduser -h /home/ractf -s /bin/sh -D ractf
 RUN echo "ractf:ractf" | chpasswd
 RUN echo "root:x:0:0:root:/root:" > /opt/newfs/etc/passwd
@@ -30,15 +36,14 @@ RUN for cmd in $(opt/toybox --long); do \
         ln -s /opt/toybox $cmd; \
     done
 
-ADD reee.sh /opt/newfs/opt/reee.sh
-RUN chmod +x /opt/newfs/opt/reee.sh
 WORKDIR /opt/newfs/bin
 RUN for cmd in 'ls' 'cat' 'tail' 'head' 'dir' 'less' 'more' 'vi' 'vim' 'grep'; do \
-        ln -s /opt/reee.sh $cmd; \
+        ln -s /opt/disabled $cmd; \
     done
 ADD flag.txt /opt/newfs/home/ractf/flag.txt
 RUN chown -R ractf:ractf /opt/newfs/home/ractf/
 RUN chmod -R +x /opt/newfs/home/ractf/
+RUN chmod -x /opt/newfs/home/ractf/flag.txt
 # Throw away this builder container now
 
 FROM scratch

@@ -3759,7 +3759,7 @@ void sh_main(void)
 
   if (cc) ff = fmemopen(cc, strlen(cc), "r");
   else if (TT.options&FLAG_s) ff = (TT.options&FLAG_i) ? 0 : stdin;
-  else if (!(ff = fpathopen(*toys.optargs))) perror_exit_raw(*toys.optargs);
+  else if (1) perror_exit_raw(*toys.optargs); //!(ff = fpathopen(*toys.optargs))
 
   // Read and execute lines from file
   if (do_source(cc ? : *toys.optargs, ff))
