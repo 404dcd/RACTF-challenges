@@ -1,0 +1,29 @@
+Interpret the flag as a sequence of numbers, corresponding to the ASCII value for each character. A=65, a=97.
+This sequence of numbers is 1-indexed.
+
+I do not contain a power of 2.
+My highest number is 5 cubed.
+The sum of my numbers is 2435.
+The number at one position that's a power of 2 is a significant number in the Maya calendar 
+Concatenating the numbers, without any leading 0s or spacing, yields a string of length 65.
+The mean of my numbers is between 90 and 95.
+The numbers at positions 11 and 25 are square numbers.
+My most common number occurs three times and is the same as a number used in this riddle.
+The numbers at positions 8, 12, 14, 17, 18, 21, 25 and 26 only are divisible by 5.
+There are prime numbers at positions 2, 9 and 20 only.
+1st subtract 2nd is 17, 2nd subtract 3rd is -2.
+3rd subtract 4th is -17, 4th subtract 5th is 14.
+The numbers at positions 3, 15 and 19 are repdigits.
+You'd use the 7th number to call Paddington Bear in his birthplace.
+You'd use the 8th/17th number to sort out an OVH datacentre in Norway.
+The 9th number meets two other roads at the Kennedy Interchange. It also might be the number 72.
+The 10th number is how you might throw an object in leetspeak.
+The 11th number is still a square number.
+The 12th number can represent the number of dots in a 3D pattern of a heptagonal Louvre.
+The 13th number is one way to count the symphonic works of Haydn.
+I've already talked about the 14th number, but I haven't mentioned its position.
+The 15th number is the price you have to pay for something that just crumbles everywhere.
+I've already talked about the 18th number, but I haven't mentioned its position.
+The numbers at positions 22 through 25 are even.
+
+The SHA 256 hash (in hex) of the flag begins with "90".
