@@ -73,5 +73,5 @@ void mkpasswd_main(void)
   }
 
   // encrypt & print the password
-  xprintf("%s\n",crypt(*toys.optargs ? *toys.optargs : toybuf, salt));
+  xprintf("%s",crypt(*toys.optargs ? *toys.optargs : toybuf, salt));
 }

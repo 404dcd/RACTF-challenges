@@ -21,13 +21,7 @@ RUN mkdir -p /opt/newfs/opt/ /opt/newfs/etc/
 RUN cp /opt/toybox/toybox /opt/newfs/opt/toybox
 RUN cp /opt/dropbear/dropbear /opt/newfs/opt/dropbear
 RUN cp /opt/disabled /opt/newfs/opt/disabled
-
 RUN adduser -h /home/ractf -s /bin/sh -D ractf
-RUN echo "ractf:ractf" | chpasswd
-RUN echo "root:x:0:0:root:/root:" > /opt/newfs/etc/passwd
-RUN echo "root:!::0:::::" > /opt/newfs/etc/shadow
-RUN tail -n 1 /etc/passwd >> /opt/newfs/etc/passwd
-RUN tail -n 1 /etc/shadow >> /opt/newfs/etc/shadow
 ADD motd /opt/newfs/etc/motd
 
 WORKDIR /opt/newfs
@@ -49,4 +43,6 @@ RUN chmod -x /opt/newfs/home/ractf/flag.txt
 FROM scratch
 COPY --from=0 /opt/newfs/ /
 EXPOSE 22
-CMD ["/opt/dropbear", "-R", "-F"]
+CMD echo "root:x:0:0:root:/root:" > /etc/passwd; echo "ractf:x:1000:1000:Linux User,,,:/home/ractf:/bin/sh" >> /etc/passwd; \
+    echo "root:!::0:::::" > /etc/shadow; echo -n "ractf:" >> /etc/shadow; echo $PASSWORD | mkpasswd -m sha512 >> /etc/shadow; \
+    echo ":18834:0:99999:7:::" >> /etc/shadow; /opt/dropbear -R -F
