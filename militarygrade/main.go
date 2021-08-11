@@ -40,8 +40,7 @@ func encrypt(plaintext string, bKey []byte, bIV []byte, blockSize int) string {
 func changer() {
 	ticker := time.NewTicker(time.Millisecond * 672).C
 	for range ticker {
-		seed := time.Now().UnixNano() & ^0x7FFFFFFFFEFFF000
-		rand.Seed(seed)
+		rand.Seed(time.Now().UnixNano() & ^0x7FFFFFFFFEFFF000)
 		for i := 0; i < rand.Intn(32); i++ {
 			rand.Seed(rand.Int63())
 		}
@@ -60,8 +59,6 @@ func changer() {
 		flagmu.Lock()
 		flag = encrypt(rawFlag, key, iv, aes.BlockSize)
 		flagmu.Unlock()
-
-		fmt.Printf("Seed = %d\n", seed)
 	}
 }
 
