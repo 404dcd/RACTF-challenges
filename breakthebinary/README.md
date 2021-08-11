@@ -8,11 +8,7 @@ Please run the container per user, it's very small. The user should be given the
 
 `docker run -p 2222:22 -it breakthebinary`
 
-`ssh ractf@127.0.0.1`, password ractf
-
-Password can be changed here https://github.com/404dcd/RACTF-challenges/blob/ee0a56d08a0364fb0030e6bd2bd98d0708b94623/breakthebinary/Dockerfile#L28, change the part after the colon
-
-Username can be changed, just do a find and replace
+`ssh ractf@127.0.0.1`, password `1WiUm2dnheQas`
 
 ## Solution
 The binary is SUIDed as root, and the flag is owned by root. This makes it impossible to echo the contents of the flag.

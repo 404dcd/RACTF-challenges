@@ -44,5 +44,5 @@ FROM scratch
 COPY --from=0 /opt/newfs/ /
 EXPOSE 22
 CMD echo "root:x:0:0:root:/root:" > /etc/passwd; echo "ractf:x:1000:1000:Linux User,,,:/home/ractf:/bin/sh" >> /etc/passwd; \
-    echo "root:!::0:::::" > /etc/shadow; echo -n "ractf:" >> /etc/shadow; echo $PASSWORD | mkpasswd -m sha512 >> /etc/shadow; \
+    echo "root:!::0:::::" > /etc/shadow; echo -n "ractf:" >> /etc/shadow; echo "8POlNixzDSThy" | mkpasswd -m sha512 >> /etc/shadow; \
     echo ":18834:0:99999:7:::" >> /etc/shadow; /opt/dropbear -R -F

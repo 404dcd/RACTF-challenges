@@ -47,4 +47,4 @@ RUN chmod u+s /opt/newfs/home/ractf/program
 FROM scratch
 COPY --from=0 /opt/newfs/ /
 EXPOSE 22
-CMD echo "root:x:0:0:root:/root:" > /etc/passwd; echo "ractf:x:1000:1000:Linux User,,,:/home/ractf:/bin/sh" >> /etc/passwd; echo "root:!::0:::::" > /etc/shadow; echo "ractf:`echo $PASSWORD | mkpasswd -m sha512`:18834:0:99999:7:::" >> /etc/shadow; /opt/dropbear -R -F
+CMD echo "root:x:0:0:root:/root:" > /etc/passwd; echo "ractf:x:1000:1000:Linux User,,,:/home/ractf:/bin/sh" >> /etc/passwd; echo "root:!::0:::::" > /etc/shadow; echo "ractf:`echo "1WiUm2dnheQas" | mkpasswd -m sha512`:18834:0:99999:7:::" >> /etc/shadow; /opt/dropbear -R -F

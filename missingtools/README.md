@@ -8,11 +8,7 @@ Please run the container per user, it's very small.
 
 `docker run -p 2222:22 -it missingtools`
 
-`ssh ractf@127.0.0.1`, password ractf
-
-Password can be changed here https://github.com/404dcd/RACTF-challenges/blob/9d2a402c715610b3110950451a351583dff272b8/missingtools/Dockerfile#L21, change the part after the colon
-
-Username can be changed, just do a find and replace
+`ssh ractf@127.0.0.1`, password `8POlNixzDSThy`
 
 ## Walkthrough
 ![demo](demo.mp4)
