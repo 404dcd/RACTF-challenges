@@ -19,3 +19,5 @@ This reduces the key space to 2^13, which is easily exhaustible. There are some 
 Brute force all key/iv pairs in that space, get a value for the encrypted flag and try them all :)
 
 Note: because I use nanoseconds there isn't really an attack vulnerability that's any easier by guessing the time of the box.
+
+UPDATE: a solve script is provided in solution/
