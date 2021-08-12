@@ -9,12 +9,12 @@ int main() {
     uint8_t* scratch = 0;
     
     char buff[64];
-    fp = fopen("/home/ractf/flag.txt", "r");
+    fp = fopen("flag.txt", "r");
     fgets(buff, 64, fp);
     fclose(fp);
 
     uint8_t keyfile[16];
-    fp = fopen("/home/ractf/keyfile", "r");
+    fp = fopen("keyfile", "r");
     fread(keyfile, 16, 1, fp);
     fclose(fp);
     
